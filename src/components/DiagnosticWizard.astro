@@ -1,0 +1,555 @@
+---
+---
+
+<section id="diagnostics" class="diagnostic-section">
+  <div class="container">
+    <div class="section-header bento-reveal">
+      <span class="badge badge-ice section-tag">核心交互功能</span>
+      <h2>CTC 互动式网络连接自检中心</h2>
+      <p>规则驱动的设备连接排错向导。根据你的操作系统与故障特征，逐步定位问题并一键生成去敏报告。</p>
+    </div>
+
+    <div class="wizard-card bento-reveal delay-2" id="diagnostic-app">
+      <!-- Step 1: Select Environment & Device -->
+      <div class="wizard-step" id="step-env">
+        <div class="step-badge">第 1 步 / 共 3 步</div>
+        <h3>选择你的操作系统或当前网络环境</h3>
+        <p class="step-desc">不同平台与网络的底层接管机制不同，请选择当前发生故障的具体设备：</p>
+
+        <div class="selection-grid">
+          <button type="button" class="select-btn" data-env="windows">
+            <span class="icon">💻</span>
+            <span class="title">Windows 系统</span>
+            <span class="subtitle">Win 11 / 10 代理与 TUN 排查</span>
+          </button>
+
+          <button type="button" class="select-btn" data-env="android">
+            <span class="icon">📱</span>
+            <span class="title">Android 手机</span>
+            <span class="subtitle">OPPO / 小米 / 华为后台保活</span>
+          </button>
+
+          <button type="button" class="select-btn" data-env="ios">
+            <span class="icon">🍎</span>
+            <span class="title">iPhone / iPad</span>
+            <span class="subtitle">iOS VPN 描述文件与时钟同步</span>
+          </button>
+
+          <button type="button" class="select-btn" data-env="campus">
+            <span class="icon">🏫</span>
+            <span class="title">校园网 / 公共 Wi-Fi</span>
+            <span class="subtitle">Web 登录认证与端口防火墙</span>
+          </button>
+
+          <button type="button" class="select-btn" data-env="homewifi">
+            <span class="icon">🏠</span>
+            <span class="title">家庭宽带 / 软路由</span>
+            <span class="subtitle">双重透明代理与 IPv6 冲突</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Select Symptom -->
+      <div class="wizard-step" id="step-symptom" style="display: none;">
+        <div class="wizard-header-nav">
+          <button type="button" class="back-link" id="btn-back-to-env">← 返回修改设备</button>
+          <div class="step-badge">第 2 步 / 共 3 步</div>
+        </div>
+        <h3>当前遇到的连接故障现象是什么？</h3>
+        <p class="step-desc">请选择最符合当前实际表现的报错特征：</p>
+
+        <div class="selection-grid">
+          <button type="button" class="select-btn" data-symptom="connected-no-web">
+            <span class="icon">🌐</span>
+            <span class="title">已连接但网页打不开</span>
+            <span class="subtitle">节点有延迟，但浏览器超时转圈</span>
+          </button>
+
+          <button type="button" class="select-btn" data-symptom="client-cannot-connect">
+            <span class="icon">🔌</span>
+            <span class="title">客户端握手直接失败</span>
+            <span class="subtitle">开关自动弹回或报 cipher 错误</span>
+          </button>
+
+          <button type="button" class="select-btn" data-symptom="network-switch-disconnect">
+            <span class="icon">📶</span>
+            <span class="title">切换网络后断开</span>
+            <span class="subtitle">Wi-Fi 切手机 5G 或息屏后掉线</span>
+          </button>
+
+          <button type="button" class="select-btn" data-symptom="node-timeout">
+            <span class="icon">⏳</span>
+            <span class="title">节点全量超时 (Timeout)</span>
+            <span class="subtitle">所有节点测速全红，无延迟响应</span>
+          </button>
+
+          <button type="button" class="select-btn" data-symptom="sub-update-fail">
+            <span class="icon">🔄</span>
+            <span class="title">订阅更新失败</span>
+            <span class="subtitle">拉取配置报错或链接解析异常</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Diagnostic Result & Interactive Checklist -->
+      <div class="wizard-step" id="step-result" style="display: none;">
+        <div class="wizard-header-nav">
+          <button type="button" class="back-link" id="btn-back-to-symptom">← 返回修改故障</button>
+          <div class="step-badge">第 3 步 / 排查指导</div>
+        </div>
+
+        <div class="result-title-box">
+          <h3 id="result-rule-title">诊断排查步骤</h3>
+          <p class="text-muted" id="result-rule-meta">基于决策树生成，请逐项核对并勾选：</p>
+        </div>
+
+        <div class="checklist-container" id="checklist-box">
+          <!-- Dynamically populated checklist -->
+        </div>
+
+        <div class="recommendation-card">
+          <h4>💡 核心诊断建议</h4>
+          <p id="recommendation-text"></p>
+        </div>
+
+        <div class="guide-link-card" id="guide-link-box">
+          <span>推荐阅读深度指南：</span>
+          <a href="#" id="guide-link-anchor" class="text-blue font-bold"></a>
+        </div>
+
+        <!-- Report Generation Box -->
+        <div class="report-section">
+          <div class="report-actions">
+            <button type="button" class="btn btn-secondary" id="btn-generate-report">
+              📋 生成去敏自检报告
+            </button>
+            <button type="button" class="btn btn-ghost" id="btn-reset-wizard">
+              🔄 重新检查
+            </button>
+          </div>
+
+          <div class="report-output-box" id="report-output-container" style="display: none;">
+            <div class="report-box-header">
+              <span>去敏自检报告（可直接复制用于工单反馈）</span>
+              <button type="button" class="copy-btn" id="btn-copy-report">一键复制报告</button>
+            </div>
+            <textarea id="report-text-area" readonly rows="9"></textarea>
+            <span class="copy-feedback" id="copy-feedback-msg" style="display: none;">已成功复制到剪贴板！</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { DIAGNOSTIC_DECISION_TREE } from '../scripts/diagnostic-wizard';
+  import { generateDiagnosticText, copyReportToClipboard } from '../scripts/diagnostic-report';
+
+  let selectedEnv = '';
+  let selectedSymptom = '';
+  let currentRule: any = null;
+
+  const envLabels: Record<string, string> = {
+    windows: 'Windows 10/11 系统',
+    android: 'Android 安卓手机',
+    ios: 'iPhone / iPad (iOS)',
+    campus: '校园网 / 公共 Wi-Fi',
+    homewifi: '家庭宽带 / 软路由'
+  };
+
+  const symptomLabels: Record<string, string> = {
+    'connected-no-web': '已连接但网页打不开',
+    'client-cannot-connect': '客户端握手直接失败',
+    'network-switch-disconnect': '切换网络后频繁断开',
+    'node-timeout': '节点全量超时 (Timeout)',
+    'sub-update-fail': '订阅更新拉取失败'
+  };
+
+  const stepEnv = document.getElementById('step-env')!;
+  const stepSymptom = document.getElementById('step-symptom')!;
+  const stepResult = document.getElementById('step-result')!;
+
+  const btnBackToEnv = document.getElementById('btn-back-to-env')!;
+  const btnBackToSymptom = document.getElementById('btn-back-to-symptom')!;
+  const btnReset = document.getElementById('btn-reset-wizard')!;
+
+  // Handle Step 1 Selection
+  document.querySelectorAll<HTMLButtonElement>('[data-env]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedEnv = btn.getAttribute('data-env') || '';
+      stepEnv.style.display = 'none';
+      stepSymptom.style.display = 'block';
+    });
+  });
+
+  // Handle Back Buttons
+  btnBackToEnv.addEventListener('click', () => {
+    stepSymptom.style.display = 'none';
+    stepEnv.style.display = 'block';
+  });
+
+  btnBackToSymptom.addEventListener('click', () => {
+    stepResult.style.display = 'none';
+    stepSymptom.style.display = 'block';
+  });
+
+  btnReset.addEventListener('click', () => {
+    selectedEnv = '';
+    selectedSymptom = '';
+    currentRule = null;
+    stepResult.style.display = 'none';
+    stepSymptom.style.display = 'none';
+    stepEnv.style.display = 'block';
+    document.getElementById('report-output-container')!.style.display = 'none';
+  });
+
+  // Handle Step 2 Selection
+  document.querySelectorAll<HTMLButtonElement>('[data-symptom]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedSymptom = btn.getAttribute('data-symptom') || '';
+      renderResult();
+    });
+  });
+
+  function renderResult() {
+    const envRules = DIAGNOSTIC_DECISION_TREE[selectedEnv];
+    currentRule = envRules?.[selectedSymptom];
+
+    if (!currentRule) {
+      // Fallback rule if specific combination not detailed
+      currentRule = {
+        title: `${envLabels[selectedEnv] || '当前设备'}：${symptomLabels[selectedSymptom] || '连接异常'}通用排查`,
+        steps: [
+          {
+            id: 'fallback-1',
+            label: "1. 核实系统时钟自动校准 (SS-2022 核心规范)",
+            detail: "确保设备时间与标准北京时间误差在 30 秒以内，否则协议握手鉴权将被服务端安全策略丢弃。",
+            actionTip: "在设备日期与时间设置中打开「自动设置时间」开关。"
+          },
+          {
+            id: 'fallback-2',
+            label: "2. 检查本地直连基础网络连通性",
+            detail: "关闭客户端，测试国内网站能否正常秒开，确认非宽带欠费或物理信号异常。",
+            actionTip: "若直连无法上网，请优先排查物理网线或 Wi-Fi 路由连通性。"
+          },
+          {
+            id: 'fallback-3',
+            label: "3. 开启公共加密 DOH 防 DNS 污染",
+            detail: "配置腾讯公共 DOH（https://doh.pub/dns-query），规避运营商 DNS 返回错误入口 IP。",
+            actionTip: "在客户端 DNS 设置中添加 DOH 解析服务。"
+          }
+        ],
+        primaryRecommendation: "建议优先核实系统对时并配置 DOH，同时排查本地物理宽带是否正常。",
+        relatedArticleUrl: "/guides/ctc-wifi-mobile-network/",
+        relatedArticleTitle: "《CTC 金龙鱼切换 Wi-Fi 和手机流量后无法连接？网络环境检查指南》"
+      };
+    }
+
+    document.getElementById('result-rule-title')!.textContent = currentRule.title;
+    document.getElementById('recommendation-text')!.textContent = currentRule.primaryRecommendation;
+
+    const guideAnchor = document.getElementById('guide-link-anchor') as HTMLAnchorElement;
+    guideAnchor.href = currentRule.relatedArticleUrl;
+    guideAnchor.textContent = currentRule.relatedArticleTitle;
+
+    // Render Checklist
+    const checklistBox = document.getElementById('checklist-box')!;
+    checklistBox.innerHTML = '';
+
+    currentRule.steps.forEach((step: any) => {
+      const itemEl = document.createElement('div');
+      itemEl.className = 'check-item';
+      itemEl.innerHTML = `
+        <label class="check-label">
+          <input type="checkbox" data-step-id="${step.id}" class="check-input" />
+          <div class="check-text">
+            <strong>${step.label}</strong>
+            <p>${step.detail}</p>
+            <span class="action-tip">👉 操作建议：${step.actionTip}</span>
+          </div>
+        </label>
+      `;
+      checklistBox.appendChild(itemEl);
+    });
+
+    stepSymptom.style.display = 'none';
+    stepResult.style.display = 'block';
+  }
+
+  // Handle Report Generation
+  document.getElementById('btn-generate-report')?.addEventListener('click', () => {
+    if (!currentRule) return;
+
+    const checkedSteps: string[] = [];
+    const pendingSteps: string[] = [];
+
+    document.querySelectorAll<HTMLInputElement>('.check-input').forEach((input, idx) => {
+      const step = currentRule.steps[idx];
+      if (input.checked) {
+        checkedSteps.push(step.label);
+      } else {
+        pendingSteps.push(step.label);
+      }
+    });
+
+    const reportText = generateDiagnosticText({
+      deviceLabel: envLabels[selectedEnv] || selectedEnv,
+      networkLabel: selectedEnv === 'campus' ? '受限校园/公共网络' : (selectedEnv === 'homewifi' ? '家庭局域网' : '常规网络'),
+      symptomLabel: symptomLabels[selectedSymptom] || selectedSymptom,
+      ruleTitle: currentRule.title,
+      checkedSteps,
+      pendingSteps,
+      recommendation: currentRule.primaryRecommendation,
+      timestamp: new Date().toLocaleString('zh-CN', { hour12: false })
+    });
+
+    const reportBox = document.getElementById('report-output-container')!;
+    const textarea = document.getElementById('report-text-area') as HTMLTextAreaElement;
+    textarea.value = reportText;
+    reportBox.style.display = 'block';
+  });
+
+  // Handle Copy Report
+  document.getElementById('btn-copy-report')?.addEventListener('click', async () => {
+    const textarea = document.getElementById('report-text-area') as HTMLTextAreaElement;
+    const ok = await copyReportToClipboard(textarea.value);
+    const feedback = document.getElementById('copy-feedback-msg')!;
+    if (ok) {
+      feedback.style.display = 'inline-block';
+      setTimeout(() => { feedback.style.display = 'none'; }, 2500);
+    }
+  });
+</script>
+
+<style>
+  .wizard-step h3 {
+    font-size: 1.6rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 8px;
+  }
+
+  .step-desc {
+    color: var(--color-secondary-text);
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+
+  .step-badge {
+    display: inline-block;
+    background-color: var(--color-ice-blue);
+    color: var(--color-deep-blue);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 12px;
+  }
+
+  .wizard-header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .back-link {
+    background: none;
+    border: none;
+    color: var(--color-button-blue);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+  }
+
+  .selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .select-btn {
+    background-color: var(--color-surface-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 22px 18px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .select-btn:hover {
+    background-color: #FFFFFF;
+    border-color: var(--color-button-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .select-btn .icon {
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+  }
+
+  .select-btn .title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-deep-blue);
+  }
+
+  .select-btn .subtitle {
+    font-size: 0.8rem;
+    color: var(--color-secondary-text);
+    line-height: 1.4;
+  }
+
+  /* Checklist Area */
+  .checklist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .check-item {
+    background-color: var(--color-surface-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+  }
+
+  .check-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+  }
+
+  .check-input {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    accent-color: var(--color-button-blue);
+    cursor: pointer;
+  }
+
+  .check-text strong {
+    font-size: 1.05rem;
+    color: var(--color-deep-blue);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .check-text p {
+    font-size: 0.9rem;
+    color: var(--color-primary-text);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+
+  .action-tip {
+    font-size: 0.82rem;
+    color: #0369a1;
+    display: block;
+    font-weight: 500;
+  }
+
+  .recommendation-card {
+    background-color: #EFF6FF;
+    border-left: 4px solid var(--color-button-blue);
+    padding: 18px 20px;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-bottom: 20px;
+  }
+
+  .recommendation-card h4 {
+    font-size: 1rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 6px;
+  }
+
+  .recommendation-card p {
+    font-size: 0.92rem;
+    color: var(--color-primary-text);
+    line-height: 1.6;
+  }
+
+  .guide-link-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .report-section {
+    border-top: 1px solid var(--color-border);
+    padding-top: 24px;
+    margin-top: 24px;
+  }
+
+  .report-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .report-output-box {
+    margin-top: 20px;
+    background-color: #0F172A;
+    border-radius: var(--radius-md);
+    padding: 20px;
+  }
+
+  .report-box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #94A3B8;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .copy-btn {
+    background-color: var(--color-button-blue);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .copy-btn:hover {
+    background-color: var(--color-button-hover);
+  }
+
+  #report-text-area {
+    width: 100%;
+    background-color: #020617;
+    color: #38BDF8;
+    border: 1px solid #1E293B;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 14px;
+    line-height: 1.5;
+    resize: vertical;
+  }
+
+  .copy-feedback {
+    display: block;
+    color: #34D399;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    font-weight: 600;
+  }
+</style>

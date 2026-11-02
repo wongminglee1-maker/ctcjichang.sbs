@@ -1,0 +1,96 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import '../styles/bento.css';
+import '../styles/animations.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  ogType?: 'website' | 'article';
+  schemaData?: any;
+}
+
+const {
+  title,
+  description,
+  canonicalUrl = new URL(Astro.url.pathname, 'https://ctcjichang.sbs').href,
+  ogType = 'website',
+  schemaData
+} = Astro.props;
+
+const defaultSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://ctcjichang.sbs/#website",
+      "url": "https://ctcjichang.sbs/",
+      "name": "CTC 金龙鱼官网",
+      "description": "CTC 金龙鱼网络环境与设备连接自检中心",
+      "inLanguage": "zh-CN"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://ctcjichang.sbs/#organization",
+      "name": "CTC 金龙鱼技术服务社区",
+      "url": "https://ctcjichang.sbs/",
+      "logo": "https://ctcjichang.sbs/favicon.svg"
+    }
+  ]
+};
+
+const finalSchema = schemaData || defaultSchema;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="CTC 金龙鱼官网" />
+    <meta property="og:image" content="https://ctcjichang.sbs/og-image.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://ctcjichang.sbs/og-image.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#122B5B" />
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
+  </head>
+  <body>
+    <Header currentPath={Astro.url.pathname} />
+    
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Core Interactive Scripts -->
+    <script>
+      import '../scripts/bento-reveal';
+      import '../scripts/mobile-nav';
+    </script>
+  </body>
+</html>

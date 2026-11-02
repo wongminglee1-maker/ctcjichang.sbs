@@ -1,0 +1,85 @@
+---
+import { userReviews, reviewNotice } from '../data/reviews';
+---
+
+<section id="reviews" class="review-section">
+  <div class="container">
+    <div class="section-header bento-reveal">
+      <span class="badge badge-ice section-tag">社群反馈与技术验证</span>
+      <h2>CTC 用户使用与排错场景反馈</h2>
+      <p>基于多操作系统真实排障案例提炼。拒绝虚假好评刷单，以严谨技术事实为唯一参照。</p>
+    </div>
+
+    <!-- Transparency Disclaimer -->
+    <div class="review-notice-banner bento-reveal mb-6">
+      <div class="notice-icon">🛡️</div>
+      <div>
+        <strong>{reviewNotice.transparencyTitle}：</strong>
+        <span>{reviewNotice.explanation}</span>
+      </div>
+    </div>
+
+    <!-- Reviews 6-Grid -->
+    <div class="reviews-grid">
+      {userReviews.map((rev, index) => (
+        <div class={`review-card bento-reveal delay-${(index % 3) + 1}`}>
+          <div>
+            <div class="review-user">
+              <div class="review-avatar">{rev.avatarLetter}</div>
+              <div class="review-info">
+                <h4>{rev.author}</h4>
+                <span>{rev.roleOrScenario}</span>
+              </div>
+            </div>
+
+            <div class="review-stars" aria-label={`评分 ${rev.rating} 星`}>
+              {'★'.repeat(rev.rating)}{'☆'.repeat(5 - rev.rating)}
+            </div>
+
+            <p>{rev.content}</p>
+          </div>
+
+          <div class="review-status-tag">
+            <span class="status-pill">{rev.statusLabel}</span>
+            <span class="date-text">{rev.feedbackDate}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .mb-6 { margin-bottom: 28px; }
+
+  .review-notice-banner {
+    background-color: rgba(5, 11, 24, 0.7);
+    border: 1px solid #1e3a66;
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 0.88rem;
+    color: #C5DFFF;
+    line-height: 1.5;
+  }
+
+  .notice-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .status-pill {
+    background-color: rgba(38, 121, 231, 0.15);
+    color: #60A5FA;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+  }
+
+  .date-text {
+    color: #64748B;
+    font-size: 0.75rem;
+  }
+</style>

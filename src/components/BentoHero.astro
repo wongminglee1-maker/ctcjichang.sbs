@@ -1,0 +1,145 @@
+---
+import { brandData } from '../data/brand';
+---
+
+<section class="hero-section">
+  <div class="container">
+    <div class="bento-grid">
+      <!-- Left Large Card (span 7 or 8) -->
+      <div class="bento-card hero-large-card col-span-7 bento-reveal">
+        <div class="hero-content-top">
+          <div class="badge badge-ice mb-4">
+            <span class="status-pulse"></span>
+            <span>Bento Cloud · 设备连接与网络排查中心</span>
+          </div>
+          <h1>{brandData.heroHeadline}</h1>
+          <p>{brandData.heroSubheadline}</p>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#features" class="btn btn-light">
+            <span>探索服务架构</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+          </a>
+          <a href="/diagnostics/" class="btn btn-secondary">
+            <span>网络自检中心</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </a>
+          <a href={brandData.registerUrl} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            <span>立即注册</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Small Card (span 5) -->
+      <div class="bento-card hero-side-card col-span-5 bento-reveal delay-2">
+        <div class="topology-header">
+          <div>
+            <span class="badge badge-purple mb-1">线路拓扑模型</span>
+            <h2>线路与连接指南</h2>
+          </div>
+          <span class="protocol-tag">SS-2022 规范</span>
+        </div>
+
+        <!-- Original SVG Node Topology Visual -->
+        <div class="topology-svg-container" aria-label="CTC 线路网络拓扑图示">
+          <svg viewBox="0 0 420 230" fill="none" xmlns="http://www.w3.org/2000/svg" class="topology-svg">
+            <!-- Background Grids & Paths -->
+            <path d="M 50 115 C 130 50, 190 50, 260 115" stroke="#C5DFFF" stroke-width="2" stroke-dasharray="4 4"/>
+            <path d="M 50 115 C 130 180, 190 180, 260 115" stroke="#C5DFFF" stroke-width="2" stroke-dasharray="4 4"/>
+            <path d="M 50 115 L 260 115" stroke="#2679E7" stroke-width="2.5"/>
+            <path d="M 260 115 L 370 70" stroke="#10B981" stroke-width="2"/>
+            <path d="M 260 115 L 370 115" stroke="#2679E7" stroke-width="2"/>
+            <path d="M 260 115 L 370 160" stroke="#8B5CF6" stroke-width="2"/>
+
+            <!-- Left: Client Source Node -->
+            <rect x="20" y="90" width="60" height="50" rx="10" fill="#122B5B" stroke="#2679E7" stroke-width="2"/>
+            <text x="50" y="112" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">多端设备</text>
+            <text x="50" y="128" fill="#C5DFFF" font-size="9" text-anchor="middle">Win/iOS/And</text>
+
+            <!-- Middle: Transit / Relay Entry Node -->
+            <rect x="210" y="85" width="100" height="60" rx="12" fill="#EAF0F8" stroke="#122B5B" stroke-width="2"/>
+            <text x="260" y="110" fill="#122B5B" font-size="12" font-weight="bold" text-anchor="middle">国内 BGP 入口</text>
+            <text x="260" y="128" fill="#617997" font-size="9" text-anchor="middle">智能优化 / DOH解析</text>
+
+            <!-- Right: Exit / PoP Nodes -->
+            <circle cx="370" cy="70" r="18" fill="#D8E9E4" stroke="#10B981" stroke-width="2"/>
+            <text x="370" y="74" fill="#065F46" font-size="10" font-weight="bold" text-anchor="middle">IEPL</text>
+
+            <circle cx="370" cy="115" r="18" fill="#C5DFFF" stroke="#2679E7" stroke-width="2"/>
+            <text x="370" y="119" fill="#1E40AF" font-size="10" font-weight="bold" text-anchor="middle">中转</text>
+
+            <circle cx="370" cy="160" r="18" fill="#E9DCF9" stroke="#8B5CF6" stroke-width="2"/>
+            <text x="370" y="164" fill="#5B21B6" font-size="10" font-weight="bold" text-anchor="middle">直连</text>
+          </svg>
+        </div>
+
+        <div class="topology-meta">
+          <div class="meta-item">
+            <span class="meta-label">协议架构</span>
+            <span class="meta-value">SS-2022 / UDP 转发</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">拓扑透明度</span>
+            <span class="meta-value">真实架构，无虚假延迟</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mb-1 { margin-bottom: 4px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  .status-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #10B981;
+    display: inline-block;
+  }
+
+  .protocol-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-deep-blue);
+    background-color: var(--color-surface-muted);
+    border: 1px solid var(--color-border);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  .topology-svg {
+    width: 100%;
+    max-height: 220px;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .meta-label {
+    font-size: 0.75rem;
+    color: var(--color-secondary-text);
+  }
+
+  .meta-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-deep-blue);
+  }
+</style>

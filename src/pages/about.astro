@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { brandData } from '../data/brand';
+import { sourceRegistry } from '../data/sources';
+
+const pageTitle = "关于 CTC 金龙鱼官网｜定位、核验原则与技术架构";
+const pageDescription = "了解 CTC 金龙鱼自检中心的建立初衷、资料核查历程、Bento Cloud 视觉设计与针对 Shadowsocks-2022 的排障准则。";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://ctcjichang.sbs/about/"
+>
+  <div class="page-container container">
+    <div class="about-card">
+      <span class="badge badge-ice mb-3">品牌溯源与自检定位</span>
+      <h1>关于 CTC 金龙鱼与本站定位</h1>
+      
+      <div class="about-section">
+        <h2>1. 网站定位与核心目标</h2>
+        <p>
+          CTC（行业通称金龙鱼机场）是一家以现代 <strong>Shadowsocks-2022 (SS-2022)</strong> 协议为主、包含直连、BGP 公网中转与企业级 IEPL 专线的网络连接服务商。本站（<code>ctcjichang.sbs</code>）作为<strong>“CTC 网络环境与设备连接自检中心”</strong>，旨在为广大技术工作者、跨境科研人员及多终端用户提供严谨、无偏见的网络排错与设备配置对照指南。
+        </p>
+        <p>
+          与传统的机场聚合评测站不同，本站不进行大面积的商业广告堆砌，不使用机械式换词 SEO，更不编造虚假测速跑分或虚构的企业官方认证。我们的唯一核心目标是：<strong>帮助真实用户彻底搞清连接失败的技术根源，实现故障自主排查。</strong>
+        </p>
+      </div>
+
+      <div class="about-section">
+        <h2>2. 历史归档与公告核查记录</h2>
+        <p>
+          我们对 CTC 的公开历史公告进行了逐项技术核对，梳理出以下关键历史节点：
+        </p>
+        <ul class="timeline-list">
+          {brandData.announcements.map((item) => (
+            <li>
+              <div class="timeline-header">
+                <span class="timeline-date">{item.date}</span>
+                <strong>{item.title}</strong>
+                <span class:list={['badge', item.status === 'expired' ? 'badge-warning' : 'badge-ice']}>
+                  {item.status === 'expired' ? '活动已过期' : '历史技术记录'}
+                </span>
+              </div>
+              <p>{item.summary}</p>
+              <span class="timeline-note">💡 说明：{item.note}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="about-section">
+        <h2>3. 跨域名差异化声明</h2>
+        <p>
+          针对同生态域名 <code>ctcjichang.lol</code> 与 <code>ctcjichang.mom</code>，本站确立了完全独立的<strong>“网络拓扑自检与多端操作系统适配”</strong>内容方向：
+        </p>
+        <ul>
+          <li><strong>差异化交互功能</strong>：本站首创并部署了纯客户端运行的“互动式网络自检中心与去敏报告生成器”；</li>
+          <li><strong>差异化原创主题</strong>：专注于 Wi-Fi 与 5G 切换、Windows 11 代理与 TUN 模式、Android 深度后台保活、iOS 描述文件管理、校园网 Web 认证及去敏反馈工单规范；</li>
+          <li><strong>独立元数据体系</strong>：保证页面 Title、Description、H1 及语义知识图谱与其它域名完全隔离，杜绝大面积内容雷同。</li>
+        </ul>
+      </div>
+
+      <div class="about-section">
+        <h2>4. 商业透明度与免责声明</h2>
+        <p>
+          本站所展示的购买与注册链接直达官方指定入口。本站保持中立的技术指南性质，不参与任何资金直接结算，不存储用户敏感账号密码，所有实时开通资费与库存规则请以实时订单后台为准。
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    padding: 60px 20px 90px 20px;
+    max-width: 900px;
+  }
+
+  .about-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 50px 44px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mb-3 { margin-bottom: 14px; }
+
+  .about-card h1 {
+    font-size: 2.3rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 30px;
+    line-height: 1.3;
+  }
+
+  .about-section {
+    margin-bottom: 36px;
+  }
+
+  .about-section h2 {
+    font-size: 1.35rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 14px;
+    border-bottom: 2px solid var(--color-ice-blue);
+    padding-bottom: 6px;
+  }
+
+  .about-section p {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-bottom: 14px;
+    color: var(--color-primary-text);
+  }
+
+  .timeline-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 16px;
+  }
+
+  .timeline-list li {
+    background-color: var(--color-surface-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+  }
+
+  .timeline-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .timeline-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-button-blue);
+    font-weight: 700;
+  }
+
+  .timeline-note {
+    font-size: 0.82rem;
+    color: var(--color-secondary-text);
+    display: block;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 640px) {
+    .about-card {
+      padding: 30px 20px;
+    }
+    .about-card h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>

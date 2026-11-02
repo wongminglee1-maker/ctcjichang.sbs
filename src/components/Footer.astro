@@ -1,0 +1,217 @@
+---
+import { brandData } from '../data/brand';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-container">
+    <div class="footer-top">
+      <div class="footer-brand-col">
+        <div class="footer-logo">
+          <div class="logo-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10" stroke-dasharray="4 2"/>
+              <path d="M12 7V17M7 12H17"/>
+            </svg>
+          </div>
+          <span class="footer-brand-name">CTC 金龙鱼</span>
+        </div>
+        <p class="footer-brand-desc">
+          专注于 Shadowsocks-2022 网络架构、设备连接自检与系统配置对照的独立技术指南门户。
+        </p>
+        <div class="footer-status-pill">
+          <span class="status-dot"></span>
+          <span>网络自检与知识库运行中</span>
+        </div>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>服务与功能</h4>
+        <ul>
+          <li><a href="/#network">线路架构</a></li>
+          <li><a href="/pricing/">套餐与资费核验</a></li>
+          <li><a href="/diagnostics/">网络连接自检中心</a></li>
+          <li><a href="/guides/">使用指南知识库</a></li>
+          <li><a href="/#faq">常见技术问题 (FAQ)</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>精选原创指南</h4>
+        <ul>
+          <li><a href="/guides/ctc-wifi-mobile-network/">Wi-Fi 与 5G 切换排查</a></li>
+          <li><a href="/guides/ctc-windows-proxy/">Win 11 代理与 TUN 模式</a></li>
+          <li><a href="/guides/ctc-android-background/">安卓后台保活设置</a></li>
+          <li><a href="/guides/ctc-ios-connectivity/">iOS 描述文件与时钟校验</a></li>
+          <li><a href="/guides/ctc-campus-public-wifi/">校园网 Web 认证排错</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>透明度与合规</h4>
+        <ul>
+          <li><a href="/about/">关于本站与核验记录</a></li>
+          <li><a href="/privacy/">隐私保护政策</a></li>
+          <li><a href="/terms/">服务使用条款</a></li>
+          <li><a href="/sitemap.xml">站点地图 (XML)</a></li>
+          <li><a href={brandData.registerUrl} target="_blank" rel="noopener noreferrer">官方注册直达通道</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">
+        <p>
+          <strong>独立声明：</strong>本站（ctcjichang.sbs）为独立的网络排错与设备配置自检门户，非机场母公司直属运营主体，不提供未经核实的金融结算或虚假资质背书。所有套餐价格、流量配额及在售状态请以实际结算页面为准。
+        </p>
+      </div>
+      <div class="footer-copyright-row">
+        <span>© {currentYear} CTC 金龙鱼 (ctcjichang.sbs). 保持客观、严谨与技术透明.</span>
+        <span>页面语言: 简体中文 (zh-CN)</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: #0A162B;
+    color: #94A3B8;
+    border-top: 1px solid #1E293B;
+    padding: 70px 0 30px 0;
+    margin-top: auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+
+  .footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-button-blue);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-brand-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #FFFFFF;
+  }
+
+  .footer-brand-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #94A3B8;
+    max-width: 320px;
+  }
+
+  .footer-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #34D399;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    width: fit-content;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #34D399;
+  }
+
+  .footer-links-col h4 {
+    color: #FFFFFF;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .footer-links-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-links-col a {
+    color: #94A3B8;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  .footer-links-col a:hover {
+    color: var(--color-ice-blue);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #1E293B;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-disclaimer p {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #64748B;
+  }
+
+  .footer-disclaimer strong {
+    color: #94A3B8;
+  }
+
+  .footer-copyright-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #64748B;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  @media (max-width: 900px) {
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+    .footer-copyright-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

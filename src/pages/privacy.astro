@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "隐私保护政策｜CTC 金龙鱼设备连接自检中心";
+const pageDescription = "CTC 金龙鱼自检中心隐私政策：本站坚持纯本地前端运算，绝不收集用户的真实 IP 地址、订阅 Token、密码凭据或私人网络日志。";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://ctcjichang.sbs/privacy/"
+>
+  <div class="page-container container">
+    <div class="legal-card">
+      <span class="badge badge-green mb-3">数据透明承诺</span>
+      <h1>CTC 金龙鱼隐私保护政策</h1>
+      <p class="updated-date">更新生效日期：2026 年 10 月 31 日</p>
+
+      <section>
+        <h2>1. 核心隐私原则</h2>
+        <p>
+          本网站（<code>ctcjichang.sbs</code>）由独立技术爱好者维护，立足于网络连接自检与知识分享。我们深刻理解网络凭据的敏感性，因此贯彻<strong>“数据最小化与本地运算优先”</strong>的最高合规原则。
+        </p>
+      </section>
+
+      <section>
+        <h2>2. 我们绝不收集的信息</h2>
+        <ul>
+          <li><strong>绝不收集订阅密钥与 Token</strong>：自检向导与报告生成工具不会读取、暂存或上传用户的订阅链接；</li>
+          <li><strong>绝不收集账号密码</strong>：本站不设个人会员中心，无需用户在本站注册或提交服务密码；</li>
+          <li><strong>绝不收集设备真实 IP 与 MAC 地址</strong>：所有连通性逻辑均基于纯前端静态规则树推导，本站服务器未部署任何用户级 IP 追踪代码；</li>
+          <li><strong>绝不拦截或上传网络日志</strong>：在生成诊断报告时，本站仅汇总用户手动勾选的复选框状态，不会收集任何系统底层网络数据包。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>3. 本地存储 (LocalStorage) 与 Cookies</h2>
+        <p>
+          本站仅使用极简的必要浏览器状态（如菜单展开状态或临时自检复选框），不使用任何跨站跟踪 Cookies，不植入第三方广告联盟分析探针。
+        </p>
+      </section>
+
+      <section>
+        <h2>4. 第三方链接透明度</h2>
+        <p>
+          当您点击本站的“立即注册”或“前往订购”按钮时，浏览器将直接跳转至服务商指定的注册与结算前端。该跳转过程完全公开透明，跳转后适用目标网站自身的隐私条款。
+        </p>
+      </section>
+
+      <section>
+        <h2>5. 隐私政策的更新</h2>
+        <p>
+          若本站的技术功能或合规规范发生调整，我们将在此页面发布修订版并更新生效日期。
+        </p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    padding: 60px 20px 90px 20px;
+    max-width: 860px;
+  }
+
+  .legal-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 50px 44px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mb-3 { margin-bottom: 14px; }
+
+  .legal-card h1 {
+    font-size: 2.3rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 8px;
+  }
+
+  .updated-date {
+    font-size: 0.88rem;
+    color: var(--color-secondary-text);
+    margin-bottom: 30px;
+  }
+
+  .legal-card section {
+    margin-bottom: 28px;
+  }
+
+  .legal-card h2 {
+    font-size: 1.25rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 12px;
+  }
+
+  .legal-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-primary-text);
+    margin-bottom: 10px;
+  }
+
+  .legal-card ul {
+    margin: 12px 0 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .legal-card li {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-primary-text);
+  }
+
+  @media (max-width: 640px) {
+    .legal-card {
+      padding: 30px 20px;
+    }
+    .legal-card h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>

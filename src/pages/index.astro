@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BentoHero from '../components/BentoHero.astro';
+import FeatureBento from '../components/FeatureBento.astro';
+import NetworkCards from '../components/NetworkCards.astro';
+import PricingBento from '../components/PricingBento.astro';
+import DiagnosticWizard from '../components/DiagnosticWizard.astro';
+import ReviewGrid from '../components/ReviewGrid.astro';
+import ArticleGrid from '../components/ArticleGrid.astro';
+import FAQ from '../components/FAQ.astro';
+
+const pageTitle = "CTC金龙鱼官网｜CTC机场连接自检、设备教程与节点使用指南 2026";
+const pageDescription = "了解 CTC 金龙鱼机场的线路、套餐与客户端使用条件，查看 Windows、Android、iPhone、校园网和家庭 Wi-Fi 连接问题的自检指南。";
+
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://ctcjichang.sbs/#website",
+      "url": "https://ctcjichang.sbs/",
+      "name": "CTC 金龙鱼官网",
+      "description": pageDescription,
+      "inLanguage": "zh-CN"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://ctcjichang.sbs/#organization",
+      "name": "CTC 金龙鱼技术服务社区",
+      "url": "https://ctcjichang.sbs/",
+      "logo": "https://ctcjichang.sbs/favicon.svg"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://ctcjichang.sbs/#webpage",
+      "url": "https://ctcjichang.sbs/",
+      "name": pageTitle,
+      "isPartOf": {
+        "@id": "https://ctcjichang.sbs/#website"
+      },
+      "about": {
+        "@id": "https://ctcjichang.sbs/#organization"
+      },
+      "description": pageDescription,
+      "inLanguage": "zh-CN"
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://ctcjichang.sbs/"
+  schemaData={homeSchema}
+>
+  <!-- Bento Hero -->
+  <BentoHero />
+
+  <!-- Feature Bento 6-grid -->
+  <FeatureBento />
+
+  <!-- Network Routes & Topology Breakdown -->
+  <NetworkCards />
+
+  <!-- Bento Pricing Section -->
+  <PricingBento />
+
+  <!-- Interactive Diagnostic Wizard (Core Differentiator) -->
+  <DiagnosticWizard />
+
+  <!-- User Feedback & Scenarios -->
+  <ReviewGrid />
+
+  <!-- Original Guides Section -->
+  <ArticleGrid showSearch={false} />
+
+  <!-- FAQ Section (10 Detailed Answers) -->
+  <FAQ />
+</BaseLayout>

@@ -1,0 +1,168 @@
+---
+import { brandData } from '../data/brand';
+---
+
+<section id="features" class="feature-section">
+  <div class="container">
+    <div class="section-header bento-reveal">
+      <span class="badge badge-ice section-tag">核心服务模块</span>
+      <h2>Bento 宫格功能全景</h2>
+      <p>打破传统单一列表，以不对称云端魔方布局呈现 CTC 线路、资费、自检与安全规范。</p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Card 1: 线路类型 (Span 8) -->
+      <div class="bento-card col-span-8 bento-reveal delay-1">
+        <div class="feature-card-header">
+          <div class="feature-icon-wrapper icon-blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+              <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+              <line x1="6" y1="6" x2="6.01" y2="6"></line>
+              <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            </svg>
+          </div>
+          <span class="badge badge-ice">三维线路矩阵</span>
+        </div>
+        <h3>线路类型：直连、中转与 IEPL 专线</h3>
+        <p>
+          根据公开技术归档，CTC 包含公网直连（含 CTC02 分线）、BGP 公网中转与企业级 IEPL 内网专线。不同线路在跨境路由、时延抖动与抗封锁能力上各有侧重，帮助用户针对网页浏览、高码率流媒体与跨国协同选择最优通道。
+        </p>
+        <div class="bento-card-footer">
+          <a href="#network" class="btn btn-ghost btn-sm">查看线路解析 →</a>
+        </div>
+      </div>
+
+      <!-- Card 2: 套餐信息 (Span 4) -->
+      <div class="bento-card col-span-4 bento-reveal delay-2">
+        <div class="feature-card-header">
+          <div class="feature-icon-wrapper icon-green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <span class="badge badge-warning">价格待核实</span>
+        </div>
+        <h3>套餐资料与开通说明</h3>
+        <p>
+          历史公开资料记录了 SE-100G、SE-360G 等年付基准配置。本站秉持真实透明原则，具体在售价格、流量月度重置规则及邀请码激活要求以实时结算后台为准。
+        </p>
+        <div class="bento-card-footer">
+          <a href="/pricing/" class="btn btn-ghost btn-sm">查看资费基准 →</a>
+        </div>
+      </div>
+
+      <!-- Card 3: 设备连接 (Span 4) -->
+      <div class="bento-card col-span-4 bento-reveal delay-3">
+        <div class="feature-card-header">
+          <div class="feature-icon-wrapper icon-purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+          </div>
+          <span class="badge badge-purple">SS-2022 规范</span>
+        </div>
+        <h3>设备兼容与时钟同步</h3>
+        <p>
+          全站支持 Shadowsocks-2022 现代隧道。严格要求 Windows、iOS、Android 等设备的系统时钟误差小于 30 秒，旧版客户端需升级内核以保证握手协议正确解析。
+        </p>
+        <div class="bento-card-footer">
+          <a href="/guides/ctc-windows-proxy/" class="btn btn-ghost btn-sm">查看客户端指南 →</a>
+        </div>
+      </div>
+
+      <!-- Card 4: 网络自检 (Span 4) -->
+      <div class="bento-card col-span-4 bento-reveal delay-4 highlight-card">
+        <div class="feature-card-header">
+          <div class="feature-icon-wrapper icon-navy">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <span class="badge badge-ice">核心差异化</span>
+        </div>
+        <h3>互动式网络连接自检中心</h3>
+        <p>
+          独立交互向导。按设备（Win/Mac/Android/iOS）与环境（Wi-Fi/蜂窝/校园网）提供决策树排查，支持生成去敏自检报告，绝不抓取个人隐私或订阅链接。
+        </p>
+        <div class="bento-card-footer">
+          <a href="/diagnostics/" class="btn btn-primary btn-sm">启动自检向导 →</a>
+        </div>
+      </div>
+
+      <!-- Card 5: 安全提醒 (Span 4) -->
+      <div class="bento-card col-span-4 bento-reveal delay-5">
+        <div class="feature-card-header">
+          <div class="feature-icon-wrapper icon-blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <span class="badge badge-green">去敏与合规</span>
+        </div>
+        <h3>订阅凭据与账户安全</h3>
+        <p>
+          严禁在公共交流群或截图中明文暴露带 Token 的订阅地址；使用公共网络时务必配置 DOH 加密解析，防止第三方利用未加密请求劫持流量。
+        </p>
+        <div class="bento-card-footer">
+          <a href="/guides/ctc-support-report/" class="btn btn-ghost btn-sm">安全防护规范 →</a>
+        </div>
+      </div>
+
+      <!-- Card 6: 原创教程 (Span 12) -->
+      <div class="bento-card col-span-12 bento-reveal delay-6 tutorial-wide-card">
+        <div class="tutorial-card-content">
+          <div>
+            <span class="badge badge-ice mb-2">深度知识库</span>
+            <h3>六大专项原创连接指南</h3>
+            <p>
+              涵盖家庭 Wi-Fi 与 5G 切换、Windows 11 代理与 TUN 模式、安卓后台保活、苹果 iOS 权限、校园网 Web 认证及工单反馈去敏模板。
+            </p>
+          </div>
+          <div class="tutorial-card-action">
+            <a href="/guides/" class="btn btn-secondary">浏览全部长篇指南 ({6} 篇) →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .btn-sm {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+  }
+
+  .mb-2 { margin-bottom: 8px; }
+
+  .highlight-card {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 100%);
+    border-color: #bcd7fa;
+  }
+
+  .tutorial-wide-card {
+    background-color: var(--color-card-white);
+    padding: 34px 40px;
+  }
+
+  .tutorial-card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .tutorial-card-content p {
+    max-width: 720px;
+  }
+
+  @media (max-width: 768px) {
+    .tutorial-card-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

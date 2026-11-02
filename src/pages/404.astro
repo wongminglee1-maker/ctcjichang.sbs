@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "404 页面未找到｜CTC 金龙鱼设备连接自检中心";
+const pageDescription = "抱歉，您访问的页面不存在或已被移除。请返回 CTC 金龙鱼首页或访问网络连接自检中心。";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://ctcjichang.sbs/404/"
+>
+  <div class="page-container container text-center">
+    <div class="not-found-card">
+      <span class="error-code">404</span>
+      <h1>页面未找到</h1>
+      <p class="error-desc">
+        抱歉，您请求的页面可能已变更路径，或该指南仍在整理归档中。您可以前往自检中心排查网络，或查看精选指南。
+      </p>
+
+      <div class="not-found-actions">
+        <a href="/" class="btn btn-primary">返回官网首页</a>
+        <a href="/diagnostics/" class="btn btn-secondary">前往网络自检中心</a>
+        <a href="/guides/" class="btn btn-ghost">浏览使用指南知识库</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    padding: 80px 20px 100px 20px;
+    max-width: 720px;
+  }
+
+  .text-center { text-align: center; }
+
+  .not-found-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 60px 40px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .error-code {
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--color-ice-blue);
+    display: block;
+    line-height: 1;
+    margin-bottom: 14px;
+    font-family: var(--font-mono);
+  }
+
+  .not-found-card h1 {
+    font-size: 2.2rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 16px;
+  }
+
+  .error-desc {
+    color: var(--color-secondary-text);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 34px;
+  }
+
+  .not-found-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+</style>

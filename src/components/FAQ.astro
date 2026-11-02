@@ -1,0 +1,177 @@
+---
+import { faqList } from '../data/faq';
+---
+
+<section id="faq" class="faq-section">
+  <div class="container">
+    <div class="section-header bento-reveal">
+      <span class="badge badge-ice section-tag">常见疑问核验</span>
+      <h2>CTC 常见技术与使用问题解答 (FAQ)</h2>
+      <p>汇集关于 CTC 金龙鱼线路、设备设置、资费透明度及故障排查的高频疑问。</p>
+    </div>
+
+    <div class="faq-accordion-container bento-reveal delay-2">
+      {faqList.map((item, index) => (
+        <div class="faq-item" data-faq-item>
+          <button 
+            type="button" 
+            class="faq-trigger" 
+            aria-expanded="false" 
+            aria-controls={`faq-answer-${item.id}`}
+            id={`faq-btn-${item.id}`}
+          >
+            <span class="faq-index">0{index + 1}</span>
+            <span class="faq-question-text">{item.question}</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          
+          <div 
+            class="faq-content" 
+            id={`faq-answer-${item.id}`} 
+            role="region" 
+            aria-labelledby={`faq-btn-${item.id}`}
+          >
+            <div class="faq-content-inner">
+              <p>{item.answer}</p>
+              {item.relatedGuideUrl && (
+                <div class="faq-link-row">
+                  <a href={item.relatedGuideUrl}>相关深度指南 →</a>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  function initFAQ() {
+    const faqItems = document.querySelectorAll<HTMLElement>('[data-faq-item]');
+    
+    faqItems.forEach((item) => {
+      const trigger = item.querySelector<HTMLButtonElement>('.faq-trigger');
+      if (!trigger) return;
+
+      trigger.addEventListener('click', () => {
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+        
+        // Toggle current
+        trigger.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+        item.classList.toggle('active', !isExpanded);
+        
+        const icon = trigger.querySelector('.faq-icon');
+        if (icon) {
+          icon.textContent = isExpanded ? '+' : '−';
+        }
+      });
+    });
+  }
+
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFAQ);
+    } else {
+      initFAQ();
+    }
+  }
+</script>
+
+<style>
+  .faq-section {
+    padding: 70px 0;
+  }
+
+  .faq-accordion-container {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .faq-item {
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .faq-item:hover, .faq-item.active {
+    border-color: #bcd7fa;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-deep-blue);
+  }
+
+  .faq-index {
+    color: var(--color-button-blue);
+    font-size: 0.9rem;
+    font-family: var(--font-mono);
+  }
+
+  .faq-question-text {
+    flex: 1;
+  }
+
+  .faq-icon {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--color-secondary-text);
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+
+  .faq-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .faq-item.active .faq-content {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-content-inner {
+    overflow: hidden;
+    padding: 0 24px 22px 56px;
+  }
+
+  .faq-content-inner p {
+    color: var(--color-primary-text);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .faq-link-row a {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-button-blue);
+  }
+
+  @media (max-width: 640px) {
+    .faq-trigger {
+      padding: 16px 18px;
+      font-size: 0.98rem;
+    }
+    .faq-content-inner {
+      padding: 0 18px 18px 18px;
+    }
+  }
+</style>

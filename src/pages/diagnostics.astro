@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DiagnosticWizard from '../components/DiagnosticWizard.astro';
+
+const pageTitle = "CTC 金龙鱼网络自检中心｜客户端连接与节点故障排查向导";
+const pageDescription = "互动式诊断 Windows 11、Android、iOS 及校园网 Wi-Fi 下的 CTC 金龙鱼连接故障，提供规则排查决策树，并支持一键生成去敏自检报告。";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://ctcjichang.sbs/diagnostics/"
+>
+  <div class="diagnostics-hero">
+    <div class="container text-center">
+      <span class="badge badge-ice mb-3">核心交互中心</span>
+      <h1>CTC 网络环境与设备连接自检中心</h1>
+      <p class="lead-text">
+        遇到节点超时、握手失败或网页无法打开？通过规则驱动的排查向导，无需任何网络工程基础，三步定位故障核心原因，并在完全保护隐私的前提下生成标准反馈报告。
+      </p>
+    </div>
+  </div>
+
+  <DiagnosticWizard />
+
+  <!-- Self-check philosophy section -->
+  <section class="philosophy-section">
+    <div class="container">
+      <div class="philosophy-grid">
+        <div class="philosophy-card">
+          <div class="phil-icon">🔒</div>
+          <h3>100% 本地规则，零数据收集</h3>
+          <p>
+            自检逻辑完全在您的浏览器端离线运算，不会向任何第三方服务器上传您的真实 IP、物理地址、订阅链接或账户凭据。
+          </p>
+        </div>
+
+        <div class="philosophy-card">
+          <div class="phil-icon">⚙️</div>
+          <h3>科学归因，杜绝盲目重置</h3>
+          <p>
+            很多连接问题由系统时间偏差 30 秒、浏览器插件抢占或安卓杀后台引发。按部就班排查，避免无意义的反复重装软件。
+          </p>
+        </div>
+
+        <div class="philosophy-card">
+          <div class="phil-icon">📋</div>
+          <h3>去敏报告，工单沟通无障碍</h3>
+          <p>
+            向服务商群组或工单系统反馈时，一键复制格式规范且已去敏的自检报告，帮助运维工程师以最快速度定位并解决问题。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .diagnostics-hero {
+    padding: 60px 0 20px 0;
+  }
+
+  .text-center { text-align: center; }
+  .mb-3 { margin-bottom: 12px; }
+
+  .diagnostics-hero h1 {
+    font-size: 2.4rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 16px;
+  }
+
+  .lead-text {
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--color-secondary-text);
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  .philosophy-section {
+    padding: 40px 0 80px 0;
+  }
+
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .philosophy-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 30px;
+  }
+
+  .phil-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .philosophy-card h3 {
+    font-size: 1.15rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 10px;
+  }
+
+  .philosophy-card p {
+    font-size: 0.92rem;
+    color: var(--color-secondary-text);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .philosophy-grid {
+      grid-template-columns: 1fr;
+    }
+    .diagnostics-hero h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>

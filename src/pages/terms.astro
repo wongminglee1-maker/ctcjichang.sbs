@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "服务使用条款｜CTC 金龙鱼设备连接自检中心";
+const pageDescription = "CTC 金龙鱼设备连接自检中心服务条款：明确技术指南的使用边界、免责声明及第三方订购通道规范。";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://ctcjichang.sbs/terms/"
+>
+  <div class="page-container container">
+    <div class="legal-card">
+      <span class="badge badge-ice mb-3">使用规范</span>
+      <h1>CTC 金龙鱼服务使用条款</h1>
+      <p class="updated-date">更新生效日期：2026 年 10 月 31 日</p>
+
+      <section>
+        <h2>1. 条款确认与服务范围</h2>
+        <p>
+          欢迎访问 CTC 金龙鱼（<code>ctcjichang.sbs</code>，以下简称“本站”）。访问或使用本站提供的文章、网络连接自检向导及相关工具，即表示您已阅读、理解并同意受本条款约束。
+        </p>
+      </section>
+
+      <section>
+        <h2>2. 技术信息与自检建议性质</h2>
+        <p>
+          本站发表的所有网络排查方案、DNS 配置建议及操作系统对照表，旨在作为客观的技术知识分享。由于网络通信环境（本地 ISP、路由器固件、操作系统版本等）极为复杂，本站无法保证某项排查步骤在所有极端网络环境下均能完全恢复连通性。用户应根据自身设备实际情况合理判断。
+        </p>
+      </section>
+
+      <section>
+        <h2>3. 价格与套餐核验免责</h2>
+        <p>
+          本站所展示的资费信息（如 SE-100G、SE-360G 等）均源自技术档案与公开历史归档，状态已标明为【待核实】。机场运营方保留根据带宽成本及服务器容量调整具体售价、流量配额及开通规则的权利。确切的订单价格、计费周期与售后退改规则以您在最终订购页面看到的即时信息为准。
+        </p>
+      </section>
+
+      <section>
+        <h2>4. 合规与合法使用守则</h2>
+        <p>
+          用户在使用本站自检工具及网络技术时，必须严格遵守所在地区的法律法规。本站严禁利用相关教程从事任何违反计算机网络安全规范、未授权渗透测试或侵犯知识产权的行为。
+        </p>
+      </section>
+
+      <section>
+        <h2>5. 知识产权与原创内容保护</h2>
+        <p>
+          本站刊载的六篇长篇原创指南、自检向导规则逻辑及 Bento Cloud 视觉样式代码，均属本站原创知识资产。未经许可，严禁恶意抓取、洗稿盗用或进行机械式镜像部署。
+        </p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    padding: 60px 20px 90px 20px;
+    max-width: 860px;
+  }
+
+  .legal-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 50px 44px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mb-3 { margin-bottom: 14px; }
+
+  .legal-card h1 {
+    font-size: 2.3rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 8px;
+  }
+
+  .updated-date {
+    font-size: 0.88rem;
+    color: var(--color-secondary-text);
+    margin-bottom: 30px;
+  }
+
+  .legal-card section {
+    margin-bottom: 28px;
+  }
+
+  .legal-card h2 {
+    font-size: 1.25rem;
+    color: var(--color-deep-blue);
+    margin-bottom: 12px;
+  }
+
+  .legal-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-primary-text);
+  }
+
+  @media (max-width: 640px) {
+    .legal-card {
+      padding: 30px 20px;
+    }
+    .legal-card h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>

@@ -1,0 +1,35 @@
+{
+  "name": "ctcjichang.sbs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "audit:content": "node scripts/audit-content.mjs",
+    "audit:seo": "node scripts/audit-seo.mjs",
+    "audit:mobile": "node scripts/audit-mobile.mjs",
+    "audit:links": "node scripts/audit-links.mjs",
+    "audit:duplicates": "node scripts/audit-duplicates.mjs",
+    "submit:indexnow": "node scripts/submit-indexnow.mjs"
+  },
+  "keywords": [
+    "ctc",
+    "ctc金龙鱼",
+    "金龙鱼机场",
+    "网络自检",
+    "bento-cloud"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "CTC 金龙鱼官网与网络连接自检中心",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.4"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1",
+    "typescript": "^5.9.3"
+  }
+}
